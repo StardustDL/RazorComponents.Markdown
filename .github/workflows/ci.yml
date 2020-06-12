@@ -1,0 +1,64 @@
+name: CI
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: pwsh
+
+env:
+  dotnet-version: "3.1.301"
+  node-version: "12.x"
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnet-version }}
+    - name: Setup NodeJS
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.node-version }}
+    - name: Restore & Build
+      run: |
+        npm install --global gulp
+        dotnet tool install --global Microsoft.Web.LibraryManager.Cli
+        pwsh -c ./tools.ps1 restore
+        dotnet build -c Release
+    - name: Test
+      run: |
+        mkdir reports/test
+        dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutput=../../reports/test/coverage.json /p:MergeWith=../../reports/test/coverage.json /maxcpucount:1
+        dotnet test -c Release ./test/Test.Base /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../reports/test/coverage.xml /p:MergeWith=../../reports/test/coverage.json
+    - name: Benchmark
+      run: dotnet run -c Release --project ./test/Benchmark.Base
+    - name: Generate reports
+      run: |
+        dotnet tool install dotnet-reportgenerator-globaltool --tool-path ./tools
+        ./tools/reportgenerator -reports:./reports/test/coverage.xml -targetdir:./reports/test
+        mkdir reports/benchmark
+        Copy-Item ./BenchmarkDotNet.Artifacts/* ./reports/benchmark -Recurse
+    - name: Upload reports
+      uses: actions/upload-artifact@master
+      with:
+        name: ci-${{ matrix.os }}
+        path: ./reports
+  invoke-cd:
+    needs: ci
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    steps:
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.PUSH_TOKEN }}
+        event-type: cd

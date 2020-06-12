@@ -1,0 +1,14 @@
+﻿@page "/markdown"
+@inject HttpClient Http
+
+<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@Value" />
+
+@code{
+    private string Value = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Value = await Http.GetStringAsync("data/article.md");
+        await base.OnInitializedAsync();
+    }
+}

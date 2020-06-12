@@ -1,0 +1,48 @@
+name: CD
+
+on:
+  repository_dispatch:
+    types: [cd]
+
+defaults:
+  run:
+    shell: pwsh
+
+env:
+  dotnet-version: "3.1.301"
+  node-version: "12.x"
+  build_version: "0.0.1.${{ github.run_number }}-preview"
+
+jobs:
+  pub-pkgs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnet-version }}
+    - name: Setup NodeJS
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.node-version }}
+    - name: Restore & Build
+      run: |
+        npm install --global gulp
+        dotnet tool install --global Microsoft.Web.LibraryManager.Cli
+        pwsh -c ./tools.ps1 restore
+        dotnet build -c Release /p:Version=${env:build_version}
+    - name: Pack
+      run: |
+        pwsh -c ./tools.ps1 pack
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: packages
+        path: ./packages
+    - name: Deploy
+      env:
+        MYGET_TOKEN: ${{ secrets.MYGET_TOKEN }}
+      run: |
+        dotnet nuget push ./packages/StardustDL.RazorComponents.Markdown.$env:build_version.nupkg -k $env:MYGET_TOKEN -s https://www.myget.org/F/stardustdl/api/v2/package

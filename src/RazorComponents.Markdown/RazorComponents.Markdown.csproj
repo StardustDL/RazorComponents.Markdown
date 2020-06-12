@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    
+    <Authors>StardustDL</Authors>
+    <Company>StardustDL</Company>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/StardustDL/RazorComponents.Markdown</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/StardustDL/RazorComponents.Markdown</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageId>StardustDL.RazorComponents.Markdown</PackageId>
+    <Product>StardustDL.RazorComponents.Markdown</Product>
+    <Description>Razor component for Markdown rendering.</Description>
+    <RootNamespace>StardustDL.RazorComponents.Markdown</RootNamespace>
+    <AssemblyName>StardustDL.RazorComponents.Markdown</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.20.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.4" />
+  </ItemGroup>
+</Project>

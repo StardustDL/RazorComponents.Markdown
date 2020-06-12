@@ -1,0 +1,43 @@
+﻿@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+
+@using Markdig
+
+<div @ref="markdownContent">
+    @((MarkupString)Html)
+</div>
+
+@code {
+    static MarkdownPipeline Pipeline { get; set; } = CustomPipeline.Build();
+
+    [Parameter]
+    public string Value { get; set; } = "";
+
+    private string Html = "";
+
+    private ElementReference markdownContent;
+
+    private string BaseUrl { get; set; }
+
+    protected override void OnInitialized()
+    {
+        BaseUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        var ind = BaseUrl.IndexOf('#');
+        if (ind >= 0)
+            BaseUrl = BaseUrl.Remove(ind);
+    }
+
+    protected override void OnParametersSet()
+    {
+        Html = Markdig.Markdown.ToHtml(Value, Pipeline);
+        base.OnParametersSet();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.highlight", markdownContent);
+        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.math", markdownContent);
+        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.diagram", markdownContent);
+        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.fixAnchor", markdownContent, BaseUrl);
+    }
+}
