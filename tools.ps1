@@ -1,20 +1,20 @@
 if ($args.Count -gt 0) {
     switch ($args[0]) {
         "npmup?" {
-            Set-Location src/AcBlog.UI.Components.Markdown ; ncu ; Set-Location ../..
+            Set-Location src/RazorComponents.Markdown ; ncu ; Set-Location ../..
             if (!$?) {
                 exit 1
             }
         }
         "npmup" {
-            Set-Location src/AcBlog.UI.Components.Markdown ; ncu -u ; npm install ; Set-Location ../..
+            Set-Location src/RazorComponents.Markdown ; ncu -u ; npm install ; Set-Location ../..
             if (!$?) {
                 exit 1
             }
         }
         "restore" {
             Write-Output "Restore npm..."
-            Set-Location src/AcBlog.UI.Components.Markdown ; npm ci ; gulp ; Set-Location ../..
+            Set-Location src/RazorComponents.Markdown ; npm ci ; gulp ; Set-Location ../..
             if (!$?) {
                 exit 1
             }

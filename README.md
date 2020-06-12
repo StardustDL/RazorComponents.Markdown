@@ -1,6 +1,6 @@
 # RazorComponents.Markdown
 
-![CI](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CI/badge.svg) ![CD](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CD/badge.svg) ![License](https://img.shields.io/github/license/StardustDL/RazorComponents.Markdown.svg)
+![CI](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CI/badge.svg) ![CD](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CD/badge.svg) ![License](https://img.shields.io/github/license/StardustDL/RazorComponents.Markdown.svg) ![downloads](https://img.shields.io/nuget/dt/StardustDL.RazorComponents.Markdown)
 
 Razor component for Markdown rendering.
 
@@ -56,7 +56,11 @@ dotnet add package StardustDL.RazorComponents.Markdown --version <version>
 
 ## Dependencies
 
-- Markdig
+- [Markdig](https://github.com/lunet-io/markdig)
 - Katex
 - Mermaid.js
 - Highlight.js
+
+## License
+
+Apache-2.0
