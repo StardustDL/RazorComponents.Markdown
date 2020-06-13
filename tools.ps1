@@ -18,7 +18,7 @@ if ($args.Count -gt 0) {
             if (!$?) {
                 exit 1
             }
-            dotnet restore -s https://www.myget.org/F/stardustdl/api/v3/index.json -s https://api.nuget.org/v3/index.json
+            dotnet restore
             if (!$?) {
                 exit 1
             }
