@@ -27,18 +27,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.node-version }}
-    - name: Restore & Build
+    - name: Install dev deps
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.AZ_TOKEN }}
-      run: |
-        dotnet nuget add source https://sparkshine.pkgs.visualstudio.com/StardustDL/_packaging/feed/nuget/v3/index.json -n aza -u sparkshine -p $env:NUGET_AUTH_TOKEN --store-password-in-clear-text
-        npm install --global gulp
-        dotnet tool install --global Microsoft.Web.LibraryManager.Cli
-        pwsh -c ./tools.ps1 restore
-        dotnet build -c Release /p:Version=${env:build_version}
+      run: pwsh -c ./tools.ps1 dev-deps
+    - name: Restore
+      run: pwsh -c ./tools.ps1 restore
+    - name: Build
+      run: dotnet build -c Release /p:Version=${env:build_version}
     - name: Pack
-      run: |
-        pwsh -c ./tools.ps1 pack
+      run: pwsh -c ./tools.ps1 pack
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: packages
+        path: ./packages
     - name: Upload artifacts
       uses: actions/upload-artifact@master
       with:

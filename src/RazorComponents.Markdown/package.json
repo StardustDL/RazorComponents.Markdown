@@ -9,9 +9,9 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "highlight.js": "^10.0.3",
+    "highlight.js": "^10.1.0",
     "katex": "^0.11.1",
-    "mermaid": "^8.5.1"
+    "mermaid": "^8.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
