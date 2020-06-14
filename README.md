@@ -4,6 +4,30 @@
 
 Razor component for Markdown rendering.
 
+## Preview
+
+Here are some screenshots from the demo project.
+
+### Header
+
+![](docs/images/demo1.png)
+
+### Code with highlighting
+
+![](docs/images/demo2.png)
+
+### Extensions
+
+![](docs/images/demo3.png)
+
+### Mathematics
+
+![](docs/images/demo4.png)
+
+### Diagram
+
+![](docs/images/demo5.png)
+
 ## Features
 
 Most features are based on Markdig.
@@ -38,7 +62,10 @@ See https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all v
 dotnet add package StardustDL.RazorComponents.Markdown --version <version>
 ```
 
-2. Add static assets to `index.html`.
+> For latest build, use the following source.
+> https://sparkshine.pkgs.visualstudio.com/StardustDL/_packaging/feed/nuget/v3/index.json
+
+1. Add static assets to `index.html`.
 
 ```html
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/highlight.js/github.css">

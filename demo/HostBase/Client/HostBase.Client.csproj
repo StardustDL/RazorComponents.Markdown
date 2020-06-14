@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\RazorComponents.Markdown\RazorComponents.Markdown.csproj" />
+    <ProjectReference Include="..\..\..\src\RazorComponents.Markdown\RazorComponents.Markdown.csproj" />
     <ProjectReference Include="..\Shared\HostBase.Shared.csproj" />
   </ItemGroup>
 
