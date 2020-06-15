@@ -17,6 +17,8 @@
     <Description>Razor component for Markdown rendering.</Description>
     <RootNamespace>StardustDL.RazorComponents.Markdown</RootNamespace>
     <AssemblyName>StardustDL.RazorComponents.Markdown</AssemblyName>
+    <PackageTags>blazor;component-library;razor-components;markdown;razor</PackageTags>
+    <Copyright>StardustDL</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

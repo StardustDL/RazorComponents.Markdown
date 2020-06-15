@@ -4,30 +4,6 @@
 
 Razor component for Markdown rendering.
 
-## Preview
-
-Here are some screenshots from the demo project.
-
-### Header
-
-![](docs/images/demo1.png)
-
-### Code with highlighting
-
-![](docs/images/demo2.png)
-
-### Extensions
-
-![](docs/images/demo3.png)
-
-### Mathematics
-
-![](docs/images/demo4.png)
-
-### Diagram
-
-![](docs/images/demo5.png)
-
 ## Features
 
 Most features are based on Markdig.
@@ -46,11 +22,11 @@ Most features are based on Markdig.
 - Media links
 - Pipe tables
 - Task lists
-- Diagrams
+- Diagrams, flowcharts
 - Auto links
 - Smarty pants
 - Emoji
-- Code highlight
+- Code highlighting
 
 ## Usage
 
@@ -81,12 +57,36 @@ dotnet add package StardustDL.RazorComponents.Markdown --version <version>
 <StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" />
 ```
 
+## Preview
+
+Here are some screenshots from the demo project.
+
+### Header
+
+![](docs/images/demo1.png)
+
+### Code with highlighting
+
+![](docs/images/demo2.png)
+
+### Extensions
+
+![](docs/images/demo3.png)
+
+### Mathematics
+
+![](docs/images/demo4.png)
+
+### Diagram
+
+![](docs/images/demo5.png)
+
 ## Dependencies
 
 - [Markdig](https://github.com/lunet-io/markdig)
-- Katex
-- Mermaid.js
-- Highlight.js
+- [Katex](https://github.com/KaTeX/KaTeX)
+- [Mermaid.js](https://github.com/mermaid-js/mermaid)
+- [Highlight.js](https://github.com/highlightjs/highlight.js)
 
 ## License
 
