@@ -9,7 +9,7 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "highlight.js": "^10.1.0",
+    "highlight.js": "^10.1.1",
     "katex": "^0.11.1",
     "mermaid": "^8.5.2"
   },
