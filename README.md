@@ -20,6 +20,9 @@ Most features are based on Markdig.
 - GridTables
 - Mathematics
 - Media links
+  - Youtube
+  - Bilibili
+  - Netease music
 - Pipe tables
 - Task lists
 - Diagrams, flowcharts
@@ -46,6 +49,7 @@ dotnet add package StardustDL.RazorComponents.Markdown --version <version>
 ```html
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/highlight.js/github.css">
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/katex/katex.min.css">
+<link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/css/markdown.css">
 
 <script src="_content/StardustDL.RazorComponents.Markdown/component-min.js" type="text/javascript"></script>
 <script src="_content/StardustDL.RazorComponents.Markdown/mermaid/mermaid.min.js" type="text/javascript"></script>

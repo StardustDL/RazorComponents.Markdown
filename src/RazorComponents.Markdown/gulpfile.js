@@ -33,6 +33,10 @@ gulp.task('markdown', function () {
         .pipe(gulp.dest('wwwroot'));
 });
 
+gulp.task('css', function () {
+    return gulp.src("./css/*").pipe(gulp.dest('wwwroot/css/'));
+});
+
 gulp.task('highlight', function () {
     return gulp.src("./node_modules/highlight.js/styles/*").pipe(gulp.dest('wwwroot/highlight.js/'));
 });
@@ -45,4 +49,4 @@ gulp.task('katex', function () {
     return gulp.src("./node_modules/katex/dist/**/*").pipe(gulp.dest('wwwroot/katex/'));
 });
 
-gulp.task('default', gulp.parallel('markdown', 'highlight', 'katex', 'mermaid'));
+gulp.task('default', gulp.parallel('markdown', 'highlight', 'katex', 'mermaid', 'css'));
