@@ -239,6 +239,10 @@ It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 
 ![netease music](https://music.163.com/#/song?id=849211)
 
+![netease music](https://music.163.com/#/album?id=84590)
+
+![netease music](https://music.163.com/#/playlist?id=3143362600)
+
 ### LaTeX
 
 When $a \ne 0$, there are two solutions to $ax^2 + bx + c = 0$ and they are

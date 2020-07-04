@@ -19,7 +19,7 @@ namespace StardustDL.RazorComponents.Markdown
         {
             string path = uri.AbsolutePath;
             var items = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
-            if(items.Length >= 2 && items[0] == "video")
+            if (items.Length >= 2 && items[0] == "video")
             {
                 return $"//player.bilibili.com/player.html?bvid={items[1]}";
             }
@@ -31,18 +31,26 @@ namespace StardustDL.RazorComponents.Markdown
 
         static string MediaLinkNeteaseMusic(Uri uri)
         {
-            string url = uri.ToString();
-            url = url.Substring(uri.Scheme.Length + 3); // ://
-            string pre = "music.163.com/#/song";
-            Console.WriteLine(url);
-            if (url.StartsWith(pre))
+            try
             {
-                url = url.Substring(pre.Length).TrimStart('?');
-                var id = url.Split("&", StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(p => p.StartsWith("id="))?.Substring(3);
-                if (id == null)
-                    return null;
-                return $"//music.163.com/outchain/player?type=2&id={id}&auto=0&height=66";
+                string url = uri.ToString();
+                url = url.Substring(uri.Scheme.Length + 3); // ://
+                string pre = "music.163.com/#/";
+                if (url.StartsWith(pre))
+                {
+                    var items = url.Substring(pre.Length).Split('?');
+                    var id = items[1].Split("&", StringSplitOptions.RemoveEmptyEntries).First(p => p.StartsWith("id="))?.Substring(3);
+                    int type = 0;
+                    if (items[0] == "song")
+                        type = 2;
+                    else if (items[0] == "playlist")
+                        type = 0;
+                    else if (items[0] == "album")
+                        type = 1;
+                    return $"//music.163.com/outchain/player?type={type}&id={id}&auto=0";
+                }
             }
+            catch { }
             return null;
         }
 
