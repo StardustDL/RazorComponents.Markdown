@@ -1,5 +1,6 @@
 ﻿@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
+@inject IMarkdownComponentService Service
 
 @using Markdig
 
@@ -8,8 +9,6 @@
 </div>
 
 @code {
-    static MarkdownPipeline Pipeline { get; set; } = CustomPipeline.Build();
-
     [Parameter]
     public string Value { get; set; } = "";
 
@@ -29,15 +28,24 @@
 
     protected override void OnParametersSet()
     {
-        Html = Markdig.Markdown.ToHtml(Value, Pipeline);
+        Html = Markdig.Markdown.ToHtml(Value, Service.GetPipeline());
         base.OnParametersSet();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.highlight", markdownContent);
-        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.math", markdownContent);
-        await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.diagram", markdownContent);
+        if (Service.EnableCodeHighlight)
+        {
+            await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.highlight", markdownContent);
+        }
+        if (Service.EnableMathematics)
+        {
+            await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.math", markdownContent);
+        }
+        if (Service.EnableDiagrams)
+        {
+            await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.diagram", markdownContent);
+        }
         await JSRuntime.InvokeVoidAsync("StardustDL_RazorComponents_Markdown.fixAnchor", markdownContent, BaseUrl);
     }
 }

@@ -4,6 +4,11 @@
 
 Razor component for Markdown rendering.
 
+Online demo:
+
+- [GitHub Pages](https://acblog.github.io/posts/article)
+- [Gitee Pages](https://acblog.gitee.io/posts/article)
+
 ## Features
 
 Most features are based on Markdig.
@@ -44,7 +49,7 @@ dotnet add package StardustDL.RazorComponents.Markdown --version <version>
 > For latest build, use the following source.
 > https://sparkshine.pkgs.visualstudio.com/StardustDL/_packaging/feed/nuget/v3/index.json
 
-1. Add static assets to `index.html`.
+2. Add static assets to `index.html`.
 
 ```html
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/highlight.js/github.css">
@@ -55,11 +60,31 @@ dotnet add package StardustDL.RazorComponents.Markdown --version <version>
 <script src="_content/StardustDL.RazorComponents.Markdown/mermaid/mermaid.min.js" type="text/javascript"></script>
 ```
 
-3. Use the component in Razor components.
+3. Add services.
+
+```csharp
+using StardustDL.RazorComponents.Markdown;
+
+builder.Services.AddSingleton<IMarkdownComponentService, MarkdownComponentService>();
+```
+
+4. Use the component in Razor components.
 
 ```razor
 <StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" />
 ```
+
+## Configuration
+
+Use `IMarkdownComponentService` to configure.
+
+```csharp
+Service.EnableCodeHighlight = true;
+Service.EnableDiagrams = true;
+Service.EnableMathematics = true;
+```
+
+If you want to customize Markdown's parser pipeline, you can inherit inherit `MarkdownComponentService` and override the method `GetPipeline()`.
 
 ## Preview
 
