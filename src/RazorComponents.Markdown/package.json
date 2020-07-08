@@ -9,13 +9,13 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "highlight.js": "^10.1.0",
+    "highlight.js": "^10.1.1",
     "katex": "^0.11.1",
     "mermaid": "^8.5.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
     "browserify": "^16.5.1",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
