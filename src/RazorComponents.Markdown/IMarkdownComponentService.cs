@@ -11,5 +11,7 @@ namespace StardustDL.RazorComponents.Markdown
         bool EnableMathematics { get; set; }
 
         MarkdownPipeline GetPipeline();
+
+        string Parse(string value);
     }
 }

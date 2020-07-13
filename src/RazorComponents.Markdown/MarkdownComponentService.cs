@@ -46,5 +46,10 @@ namespace StardustDL.RazorComponents.Markdown
             builder.UseGenericAttributes(); // Must be last as it is one parser that is modifying other parsers
             return builder.Build();
         }
+
+        public virtual string Parse(string value)
+        {
+            return Markdig.Markdown.ToHtml(value, GetPipeline());
+        }
     }
 }

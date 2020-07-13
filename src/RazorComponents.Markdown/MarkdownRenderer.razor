@@ -2,15 +2,19 @@
 @inject NavigationManager NavigationManager
 @inject IMarkdownComponentService Service
 
-@using Markdig
-
-<div @ref="markdownContent" class="markdownBodyInner">
+<div @ref="markdownContent" class="@Class" style="@Style">
     @((MarkupString)Html)
 </div>
 
 @code {
     [Parameter]
     public string Value { get; set; } = "";
+
+    [Parameter]
+    public string Style { get; set; } = "";
+
+    [Parameter]
+    public string Class { get; set; } = "";
 
     private string Html = "";
 
@@ -28,8 +32,14 @@
 
     protected override void OnParametersSet()
     {
-        Html = Markdig.Markdown.ToHtml(Value, Service.GetPipeline());
+        Html = Service.Parse(Value);
         base.OnParametersSet();
+    }
+
+    public void Rerender()
+    {
+        Html = Service.Parse(Value);
+        StateHasChanged();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

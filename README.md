@@ -43,7 +43,7 @@ Most features are based on Markdig.
 See https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all versions.
 
 ```sh
-dotnet add package StardustDL.RazorComponents.Markdown --version <version>
+dotnet add package StardustDL.RazorComponents.Markdown
 ```
 
 > For latest build, use the following source.
@@ -71,7 +71,7 @@ builder.Services.AddSingleton<IMarkdownComponentService, MarkdownComponentServic
 4. Use the component in Razor components.
 
 ```razor
-<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" />
+<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" Class="your class" Style="your styles"/>
 ```
 
 ## Configuration
@@ -85,6 +85,8 @@ Service.EnableMathematics = true;
 ```
 
 If you want to customize Markdown's parser pipeline, you can inherit inherit `MarkdownComponentService` and override the method `GetPipeline()`.
+
+If you want to customize the all things, you can inherit inherit `MarkdownComponentService` and override the method `Parse(string)`.
 
 ## Preview
 
