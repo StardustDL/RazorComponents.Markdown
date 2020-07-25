@@ -1,6 +1,7 @@
 ﻿using Markdig;
 using Markdig.Extensions.MediaLinks;
 using StardustDL.RazorComponents.Markdown.Extensions;
+using System.Threading.Tasks;
 
 namespace StardustDL.RazorComponents.Markdown
 {
@@ -47,9 +48,9 @@ namespace StardustDL.RazorComponents.Markdown
             return builder.Build();
         }
 
-        public virtual string Parse(string value)
+        public virtual Task<string> RenderHtml(string value)
         {
-            return Markdig.Markdown.ToHtml(value, GetPipeline());
+            return Task.FromResult(Markdig.Markdown.ToHtml(value, GetPipeline()));
         }
     }
 }

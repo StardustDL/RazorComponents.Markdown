@@ -86,7 +86,7 @@ Service.EnableMathematics = true;
 
 If you want to customize Markdown's parser pipeline, you can inherit inherit `MarkdownComponentService` and override the method `GetPipeline()`.
 
-If you want to customize the all things, you can inherit inherit `MarkdownComponentService` and override the method `Parse(string)`.
+If you want to customize the all things, you can inherit inherit `MarkdownComponentService` and override the method `RenderHTML(string)`.
 
 ## Preview
 

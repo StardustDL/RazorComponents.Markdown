@@ -1,4 +1,5 @@
 ﻿using Markdig;
+using System.Threading.Tasks;
 
 namespace StardustDL.RazorComponents.Markdown
 {
@@ -12,6 +13,6 @@ namespace StardustDL.RazorComponents.Markdown
 
         MarkdownPipeline GetPipeline();
 
-        string Parse(string value);
+        Task<string> RenderHtml(string value);
     }
 }

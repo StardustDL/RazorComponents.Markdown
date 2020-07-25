@@ -2,9 +2,9 @@
 @inject NavigationManager NavigationManager
 @inject IMarkdownComponentService Service
 
-<div @ref="markdownContent" class="@Class" style="@Style">
+<article @ref="markdownContent" class="@Class" style="@Style">
     @((MarkupString)Html)
-</div>
+</article>
 
 @code {
     [Parameter]
@@ -30,15 +30,15 @@
             BaseUrl = BaseUrl.Remove(ind);
     }
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        Html = Service.Parse(Value);
-        base.OnParametersSet();
+        Html = await Service.RenderHtml(Value);
+        await base.OnParametersSetAsync();
     }
 
-    public void Rerender()
+    public async Task Rerender()
     {
-        Html = Service.Parse(Value);
+        Html = await Service.RenderHtml(Value);
         StateHasChanged();
     }
 
