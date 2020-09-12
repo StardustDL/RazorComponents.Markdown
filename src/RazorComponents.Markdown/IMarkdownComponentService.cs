@@ -1,4 +1,5 @@
 ﻿using Markdig;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
 namespace StardustDL.RazorComponents.Markdown
@@ -14,5 +15,13 @@ namespace StardustDL.RazorComponents.Markdown
         MarkdownPipeline GetPipeline();
 
         Task<string> RenderHtml(string value);
+    }
+
+    public static class MarkdownComponentServiceExtensions
+    {
+        public static IServiceCollection AddMarkdownComponent(this IServiceCollection services)
+        {
+            return services.AddSingleton<IMarkdownComponentService, MarkdownComponentService>();
+        }
     }
 }

@@ -1,6 +1,6 @@
 # RazorComponents.Markdown
 
-![CI](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CI/badge.svg) ![CD](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CD/badge.svg) ![License](https://img.shields.io/github/license/StardustDL/RazorComponents.Markdown.svg) ![downloads](https://img.shields.io/nuget/dt/StardustDL.RazorComponents.Markdown)
+![CI](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CI/badge.svg) ![CD](https://github.com/StardustDL/RazorComponents.Markdown/workflows/CD/badge.svg) ![License](https://img.shields.io/github/license/StardustDL/RazorComponents.Markdown.svg) [![downloads](https://img.shields.io/nuget/dt/StardustDL.RazorComponents.Markdown)](https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown/)
 
 Razor component for Markdown rendering.
 
@@ -40,7 +40,7 @@ Most features are based on Markdig.
 
 1. Add the newest package on NuGet.
 
-See https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all versions.
+Visit https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all versions.
 
 ```sh
 dotnet add package StardustDL.RazorComponents.Markdown
@@ -52,12 +52,14 @@ dotnet add package StardustDL.RazorComponents.Markdown
 2. Add static assets to `index.html`.
 
 ```html
-<link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/highlight.js/github.css">
+<link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/prismjs/themes/prism.css">
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/katex/katex.min.css">
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/css/markdown.css">
 
 <script src="_content/StardustDL.RazorComponents.Markdown/component-min.js" type="text/javascript"></script>
 <script src="_content/StardustDL.RazorComponents.Markdown/mermaid/mermaid.min.js" type="text/javascript"></script>
+<script src="_content/StardustDL.RazorComponents.Markdown/prismjs/components/prism-core.min.js"></script>
+<script src="_content/StardustDL.RazorComponents.Markdown/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
 ```
 
 3. Add services.
@@ -65,7 +67,7 @@ dotnet add package StardustDL.RazorComponents.Markdown
 ```csharp
 using StardustDL.RazorComponents.Markdown;
 
-builder.Services.AddSingleton<IMarkdownComponentService, MarkdownComponentService>();
+builder.Services.AddMarkdownComponent();
 ```
 
 4. Use the component in Razor components.
@@ -87,6 +89,12 @@ Service.EnableMathematics = true;
 If you want to customize Markdown's parser pipeline, you can inherit inherit `MarkdownComponentService` and override the method `GetPipeline()`.
 
 If you want to customize the all things, you can inherit inherit `MarkdownComponentService` and override the method `RenderHTML(string)`.
+
+For custom `IMarkdownComponentService`, use the codes below to inject services.
+
+```cs
+builder.Services.AddSingleton<IMarkdownComponentService, MarkdownComponentService>();
+```
 
 ## Preview
 
@@ -117,7 +125,7 @@ Here are some screenshots from the demo project.
 - [Markdig](https://github.com/lunet-io/markdig)
 - [Katex](https://github.com/KaTeX/KaTeX)
 - [Mermaid.js](https://github.com/mermaid-js/mermaid)
-- [Highlight.js](https://github.com/highlightjs/highlight.js)
+- [PrismJS](https://github.com/PrismJS/prism)
 
 ## License
 

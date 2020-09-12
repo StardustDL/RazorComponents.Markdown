@@ -1,6 +1,6 @@
 "use strict";
 
-const hljs = require('highlight.js');
+// const hljs = require('highlight.js');
 const katex = require('katex');
 var hasInitDiagram = false;
 const S4 = function () {
@@ -14,7 +14,7 @@ window.StardustDL_RazorComponents_Markdown = {
     highlight: function (element) {
         // hljs.initHighlighting();
         element.querySelectorAll('pre code').forEach((block) => {
-            hljs.highlightBlock(block);
+            window.Prism.highlightElement(block);
         });
     },
     math: function (element) {
