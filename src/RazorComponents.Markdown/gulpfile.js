@@ -39,7 +39,7 @@ gulp.task('css', function () {
 
 gulp.task('highlight', function () {
     // return gulp.src("./node_modules/highlight.js/styles/*").pipe(gulp.dest('wwwroot/highlight.js/'));
-    return gulp.src("./node_modules/prismjs/**/*").pipe(gulp.dest('wwwroot/prismjs/'));
+    return gulp.src(["./node_modules/prismjs/**/*", "!./node_modules/prismjs/LICENSE"]).pipe(gulp.dest('wwwroot/prismjs/'));
 });
 
 gulp.task('mermaid', function () {
