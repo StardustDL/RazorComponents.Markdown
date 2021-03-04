@@ -11,7 +11,7 @@ defaults:
 env:
   dotnet-version: "5.0.x"
   node-version: "12.x"
-  build_version: "0.0.2"
+  build_version: "0.0.3"
 
 jobs:
   pub-pkgs:

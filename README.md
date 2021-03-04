@@ -38,7 +38,7 @@ Most features are based on Markdig.
 
 ## Usage
 
-1. Add the newest package on NuGet.
+Add the newest package on NuGet.
 
 Visit https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all versions.
 
@@ -49,7 +49,21 @@ dotnet add package StardustDL.RazorComponents.Markdown
 > For latest build, use the following source.
 > https://sparkshine.pkgs.visualstudio.com/StardustDL/_packaging/feed/nuget/v3/index.json
 
-2. Add static assets to `index.html`.
+### Module Install
+
+This project is built on [Modulight](https://github.com/StardustDL/modulight).
+
+You can it by following the instructions from [Usage](https://github.com/StardustDL/modulight#usage) and [Use Razor Component Modules](https://github.com/StardustDL/modulight#use-razor-component-modules)
+
+```cs
+builder.AddMarkdownModule();
+```
+
+### Original Install
+
+> If you don't want to use the module, and want to control all resources manually, then use this.
+
+1. Add static assets to `index.html`.
 
 ```html
 <link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/prismjs/themes/prism.css">
@@ -62,7 +76,7 @@ dotnet add package StardustDL.RazorComponents.Markdown
 <script src="_content/StardustDL.RazorComponents.Markdown/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
 ```
 
-3. Add services.
+2. Add services.
 
 ```csharp
 using StardustDL.RazorComponents.Markdown;
@@ -70,7 +84,7 @@ using StardustDL.RazorComponents.Markdown;
 builder.Services.AddMarkdownComponent();
 ```
 
-4. Use the component in Razor components.
+### Use the component
 
 ```razor
 <StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" Class="your class" Style="your styles"/>
@@ -93,6 +107,7 @@ If you want to customize the all things, you can inherit inherit `MarkdownCompon
 For custom `IMarkdownComponentService`, use the codes below to inject services.
 
 ```cs
+// before AddModules
 builder.Services.AddSingleton<IMarkdownComponentService, MarkdownComponentService>();
 ```
 

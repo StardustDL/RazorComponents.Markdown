@@ -1,10 +1,12 @@
 ﻿using Markdig;
 using Markdig.Extensions.MediaLinks;
+using Modulight.Modules.Hosting;
 using StardustDL.RazorComponents.Markdown.Extensions;
 using System.Threading.Tasks;
 
 namespace StardustDL.RazorComponents.Markdown
 {
+
     public class MarkdownComponentService : IMarkdownComponentService
     {
         public bool EnableCodeHighlight { get; set; } = true;
