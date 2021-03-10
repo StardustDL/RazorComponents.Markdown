@@ -26,7 +26,7 @@
   
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.23.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
     <PackageReference Include="Modulight.Modules.Client.RazorComponents" Version="0.0.4" />
   </ItemGroup>
 </Project>
