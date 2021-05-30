@@ -66,6 +66,7 @@ Task NPMUP {
     Set-Location src/RazorComponents.Markdown
     Exec { ncu -u }
     Exec { npm i }
+    Exec { npm audit fix }
     Set-Location ../..
 }
 
