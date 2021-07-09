@@ -46,20 +46,62 @@ Visit https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all
 dotnet add package StardustDL.RazorComponents.Markdown
 ```
 
-> For latest build, use the following source.
-> https://sparkshine.pkgs.visualstudio.com/StardustDL/_packaging/feed/nuget/v3/index.json
+### Install
 
-### Module Install
+#### Module Install
 
 This project is built on [Modulight](https://github.com/StardustDL/modulight).
 
-You can it by following the instructions from [Usage](https://github.com/StardustDL/modulight#usage) and [Use Razor Component Modules](https://github.com/StardustDL/modulight#use-razor-component-modules)
+You can it by following the instructions from [Usage](https://github.com/StardustDL/modulight#usage) and [Use Razor Component Modules](https://github.com/StardustDL/modulight#use-razor-component-modules).
+
+See [demo](./demo/HostBase/Client) for details.
+
+**WebAssembly**
 
 ```cs
-builder.AddMarkdownModule();
+// in App.razor
+
+<Modulight.Modules.Client.RazorComponents.UI.ResourceDeclare />
+
+// in Program.cs
+
+public static async Task Main(string[] args) 
+{ 
+    var builder = WebAssemblyHostBuilder.CreateDefault(args); 
+    builder.RootComponents.Add<App>("app");
+
+    builder.Services.AddModules(builder => 
+    { 
+        builder.UseRazorComponentClientModules().AddMarkdownModule(); 
+    }); 
+
+    builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }); 
+
+    // Attention: RunAsyncWithModules
+    await builder.Build().RunAsyncWithModules(); 
+} 
 ```
 
-### Original Install
+**Razor Pages**
+
+```cs
+// in Startup: void ConfigureServices(ISeviceCollection services)
+
+using StardustDL.RazorComponents.Markdown;
+
+services.AddModules(builder => {
+    builder.UseRazorComponentClientModules().AddMarkdownModule();
+});
+
+// Generic hosting. (provided by package Modulight.Modules.Hosting, need to add this package)
+// in Program: Task Main(string[] args)
+
+using Microsoft.Extensions.Hosting;
+
+await CreateHostBuilder(args).Build().RunAsyncWithModules();
+```
+
+#### Original Install
 
 > If you don't want to use the module, and want to control all resources manually, then use this.
 
