@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-
+    <Nullable>enable</Nullable>
     <Authors>StardustDL</Authors>
     <Company>StardustDL</Company>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

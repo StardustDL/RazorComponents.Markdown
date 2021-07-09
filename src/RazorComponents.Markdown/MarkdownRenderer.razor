@@ -1,6 +1,7 @@
 ﻿@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 @inject IMarkdownComponentService Service
+@inject ILogger<MarkdownRenderer> Logger
 
 <article @ref="markdownContent" class="@Class" style="@Style">
     @((MarkupString)Html)
@@ -16,11 +17,20 @@
     [Parameter]
     public string Class { get; set; } = "";
 
-    private string Html = "";
+    [Parameter]
+    public TimeSpan? RenderInterval { get; set; } = null;
+
+    private string Html { get; set; } = "";
+
+    private string? OldValue { get; set; } = null;
+
+    private DateTimeOffset? LastRender { get; set; } = null;
+
+    private bool ScheduledRender { get; set; } = false;
+
+    private string BaseUrl { get; set; } = "";
 
     private ElementReference markdownContent;
-
-    private string BaseUrl { get; set; }
 
     protected override void OnInitialized()
     {
@@ -32,13 +42,46 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        Html = await Service.RenderHtml(Value);
+        if (LastRender is null) // Havn't rendered
+        {
+            await Rerender();
+        }
+        else if (Value != OldValue) // Only render when changed
+        {
+            if (RenderInterval is null) // No delay rendering
+            {
+                await Rerender();
+            }
+            else
+            {
+                var interval = DateTimeOffset.Now - LastRender.Value;
+                if (interval >= RenderInterval.Value) // Exceed the interval after last rendering
+                {
+                    await Rerender();
+                }
+                else if (!ScheduledRender) // Havn't schedule rendering
+                {
+                    ScheduledRender = true;
+                    _ = Task.Delay(RenderInterval.Value - interval).ContinueWith(async _ =>
+                    {
+                        if (RenderInterval is null || DateTimeOffset.Now - LastRender.Value >= RenderInterval.Value)
+                        {
+                            await Rerender();
+                        }
+                        ScheduledRender = false;
+                    });
+                }
+            }
+        }
         await base.OnParametersSetAsync();
     }
 
     public async Task Rerender()
     {
-        Html = await Service.RenderHtml(Value);
+        // Logger.LogInformation("Rendering.");
+        OldValue = Value;
+        LastRender = DateTimeOffset.Now;
+        Html = await Service.RenderHtml(OldValue);
         StateHasChanged();
     }
 
