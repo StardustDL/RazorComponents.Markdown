@@ -18,10 +18,15 @@
     <AssemblyName>StardustDL.RazorComponents.Markdown</AssemblyName>
     <PackageTags>blazor;component-library;razor-components;markdown;razor</PackageTags>
     <Copyright>StardustDL</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   
   <ItemGroup>

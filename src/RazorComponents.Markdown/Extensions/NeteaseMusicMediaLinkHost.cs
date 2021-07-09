@@ -1,22 +1,23 @@
 ﻿using Markdig.Extensions.MediaLinks;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace StardustDL.RazorComponents.Markdown.Extensions
 {
     public class NeteaseMusicMediaLinkHost : IHostProvider
     {
-        static string MediaLink(Uri uri)
+        static string? MediaLink(Uri uri)
         {
             try
             {
                 string url = uri.ToString();
-                url = url.Substring(uri.Scheme.Length + 3); // ://
+                url = url[(uri.Scheme.Length + 3)..]; // ://
                 string pre = "music.163.com/#/";
                 if (url.StartsWith(pre))
                 {
-                    var items = url.Substring(pre.Length).Split('?');
-                    var id = items[1].Split("&", StringSplitOptions.RemoveEmptyEntries).First(p => p.StartsWith("id="))?.Substring(3);
+                    var items = url[pre.Length..].Split('?');
+                    var id = items[1].Split("&", StringSplitOptions.RemoveEmptyEntries).First(p => p.StartsWith("id="))?[3..];
                     int type = 0;
                     if (items[0] == "song")
                         type = 2;
@@ -34,9 +35,9 @@ namespace StardustDL.RazorComponents.Markdown.Extensions
         static IHostProvider Inner { get; } = HostProviderBuilder.Create(
                 "music.163.com", MediaLink, iframeClass: "neteasemusic");
 
-        public bool TryHandle(Uri mediaUri, bool isSchemaRelative, out string iframeUrl) => Inner.TryHandle(mediaUri, isSchemaRelative, out iframeUrl);
+        public bool TryHandle(Uri mediaUri, bool isSchemaRelative, [NotNullWhen(true)] out string? iframeUrl) => Inner.TryHandle(mediaUri, isSchemaRelative, out iframeUrl);
 
-        public string Class => Inner.Class;
+        public string? Class => Inner.Class;
 
         public bool AllowFullScreen => Inner.AllowFullScreen;
     }

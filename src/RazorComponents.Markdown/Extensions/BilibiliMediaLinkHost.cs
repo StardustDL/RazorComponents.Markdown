@@ -1,13 +1,14 @@
 ﻿using Markdig.Extensions.MediaLinks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace StardustDL.RazorComponents.Markdown.Extensions
 {
     public class BilibiliMediaLinkHost : IHostProvider
     {
-        static string MediaLink(Uri uri)
+        static string? MediaLink(Uri uri)
         {
             string path = uri.AbsolutePath;
             var items = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
@@ -24,9 +25,9 @@ namespace StardustDL.RazorComponents.Markdown.Extensions
         static IHostProvider Inner { get; } = HostProviderBuilder.Create(
                 "www.bilibili.com", MediaLink, iframeClass: "bilibili");
 
-        public bool TryHandle(Uri mediaUri, bool isSchemaRelative, out string iframeUrl) => Inner.TryHandle(mediaUri, isSchemaRelative, out iframeUrl);
+        public bool TryHandle(Uri mediaUri, bool isSchemaRelative, [NotNullWhen(true)] out string? iframeUrl) => Inner.TryHandle(mediaUri, isSchemaRelative, out iframeUrl);
 
-        public string Class => Inner.Class;
+        public string? Class => Inner.Class;
 
         public bool AllowFullScreen => Inner.AllowFullScreen;
     }

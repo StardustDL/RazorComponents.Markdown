@@ -39,8 +39,6 @@ Online demo:
 
 Add the newest package on NuGet.
 
-Visit https://www.nuget.org/packages/StardustDL.RazorComponents.Markdown for all versions.
-
 ```sh
 dotnet add package StardustDL.RazorComponents.Markdown
 ```
@@ -96,11 +94,17 @@ using Microsoft.Extensions.Hosting;
 await CreateHostBuilder(args).Build().RunAsyncWithModules();
 ```
 
-### Use the component
+### Using
 
 ```razor
-<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" Class="your class" Style="your styles" RenderInterval="@TimeSpan.FromSeconds(10)"/>
+<StardustDL.RazorComponents.Markdown.MarkdownRenderer
+    Value="@MarkdownText"
+    Class="your class"
+    Style="your styles"
+    RenderInterval="@TimeSpan.FromSeconds(10)"/>
 ```
+
+Parameters:
 
 - `Value` Raw Markdown (`String`)
 - `Class` class attribute

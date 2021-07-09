@@ -64,7 +64,7 @@
                     ScheduledRender = true;
                     _ = Task.Delay(RenderInterval.Value - interval).ContinueWith(async _ =>
                     {
-                        if (RenderInterval is null || DateTimeOffset.Now - LastRender.Value >= RenderInterval.Value)
+                        if (Value != OldValue && (RenderInterval is null || DateTimeOffset.Now - LastRender.Value >= RenderInterval.Value))
                         {
                             await Rerender();
                         }
