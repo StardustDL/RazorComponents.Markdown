@@ -11,8 +11,6 @@ Online demo:
 
 ## Features
 
-Most features are based on Markdig.
-
 - Abbreviations
 - Auto identifiers
 - Citations
@@ -35,6 +33,7 @@ Most features are based on Markdig.
 - Smarty pants
 - Emoji
 - Code highlighting
+- Delay rendering for less CPU intensive
 
 ## Usage
 
@@ -48,13 +47,9 @@ dotnet add package StardustDL.RazorComponents.Markdown
 
 ### Install
 
-#### Module Install
-
 This project is built on [Modulight](https://github.com/StardustDL/modulight).
 
-You can it by following the instructions from [Usage](https://github.com/StardustDL/modulight#usage) and [Use Razor Component Modules](https://github.com/StardustDL/modulight#use-razor-component-modules).
-
-See [demo](./demo/HostBase/Client) for details.
+Here are the example codes, which based on the instructions from [Usage](https://github.com/StardustDL/modulight#usage) and [Use Razor Component Modules](https://github.com/StardustDL/modulight#use-razor-component-modules). See [demo](./demo/HostBase/Client) for details.
 
 **WebAssembly**
 
@@ -101,40 +96,22 @@ using Microsoft.Extensions.Hosting;
 await CreateHostBuilder(args).Build().RunAsyncWithModules();
 ```
 
-#### Original Install
-
-> If you don't want to use the module, and want to control all resources manually, then use this.
-
-1. Add static assets to `index.html`.
-
-```html
-<link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/prismjs/themes/prism.css">
-<link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/katex/katex.min.css">
-<link rel="stylesheet" type="text/css" href="_content/StardustDL.RazorComponents.Markdown/css/markdown.css">
-
-<script src="_content/StardustDL.RazorComponents.Markdown/component-min.js" type="text/javascript"></script>
-<script src="_content/StardustDL.RazorComponents.Markdown/mermaid/mermaid.min.js" type="text/javascript"></script>
-<script src="_content/StardustDL.RazorComponents.Markdown/prismjs/components/prism-core.min.js"></script>
-<script src="_content/StardustDL.RazorComponents.Markdown/prismjs/plugins/autoloader/prism-autoloader.min.js"></script>
-```
-
-2. Add services.
-
-```csharp
-using StardustDL.RazorComponents.Markdown;
-
-builder.Services.AddMarkdownComponent();
-```
-
 ### Use the component
 
 ```razor
-<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" Class="your class" Style="your styles"/>
+<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@MarkdownText" Class="your class" Style="your styles" RenderInterval="@TimeSpan.FromSeconds(10)"/>
 ```
+
+- `Value` Raw Markdown (`String`)
+- `Class` class attribute
+- `Style` style attribute
+- `RenderInterval` Delay rendering interval (`TimeSpan`), default `null` for no delay.
 
 ## Configuration
 
 Use `IMarkdownComponentService` to configure.
+
+> Attention: The configuration will be changed in next version.
 
 ```csharp
 Service.EnableCodeHighlight = true;
