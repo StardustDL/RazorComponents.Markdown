@@ -1,0 +1,16 @@
+﻿@page "/editor"
+
+<EditForm Model="@model">
+    <InputTextArea @bind-Value="@model.Value" style="width: 100%"></InputTextArea>
+</EditForm>
+
+<StardustDL.RazorComponents.Markdown.MarkdownRenderer Value="@model.Value" RenderInterval="@TimeSpan.FromSeconds(1)"/>
+
+@code{
+    class Model
+    {
+        public string Value { get; set; } = "";
+    }
+
+    Model model = new Model();
+}

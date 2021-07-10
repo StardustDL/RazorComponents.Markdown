@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostBase.Server", "demo\Hos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostBase.Shared", "demo\HostBase\Shared\HostBase.Shared.csproj", "{1BFFE1D5-CD31-4B20-95C5-1174082F001A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "demo\BlazorServer\BlazorServer.csproj", "{74214C39-7ED5-4E42-BBE9-0A02E2D8011A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{1BFFE1D5-CD31-4B20-95C5-1174082F001A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BFFE1D5-CD31-4B20-95C5-1174082F001A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BFFE1D5-CD31-4B20-95C5-1174082F001A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74214C39-7ED5-4E42-BBE9-0A02E2D8011A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74214C39-7ED5-4E42-BBE9-0A02E2D8011A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74214C39-7ED5-4E42-BBE9-0A02E2D8011A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74214C39-7ED5-4E42-BBE9-0A02E2D8011A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{8DFFEC7C-D31F-4801-AF58-15B8FF876007} = {0D22F2BF-BA2D-49B5-809F-83FA22033584}
 		{6E357BB2-94BB-488F-8CBB-1DFB5ABC52EE} = {0D22F2BF-BA2D-49B5-809F-83FA22033584}
 		{1BFFE1D5-CD31-4B20-95C5-1174082F001A} = {0D22F2BF-BA2D-49B5-809F-83FA22033584}
+		{74214C39-7ED5-4E42-BBE9-0A02E2D8011A} = {0D22F2BF-BA2D-49B5-809F-83FA22033584}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D3ED303-A748-4CA3-BBDF-017444C890FB}
