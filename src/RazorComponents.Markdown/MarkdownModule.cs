@@ -1,4 +1,7 @@
-﻿using Modulight.Modules;
+﻿using Ganss.XSS;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Modulight.Modules;
 using Modulight.Modules.Client.RazorComponents;
 using Modulight.Modules.Client.RazorComponents.UI;
 using Modulight.Modules.Hosting;
@@ -26,9 +29,18 @@ namespace StardustDL.RazorComponents.Markdown
     [ModuleUIResource(UIResourceType.StyleSheet, "_content/StardustDL.RazorComponents.Markdown/prismjs/themes/prism.css")]
     [ModuleUIResource(UIResourceType.StyleSheet, "_content/StardustDL.RazorComponents.Markdown/katex/katex.min.css")]
     [ModuleUIResource(UIResourceType.StyleSheet, "_content/StardustDL.RazorComponents.Markdown/css/markdown.css")]
-    [ModuleService(typeof(MarkdownComponentService), ServiceType = typeof(IMarkdownComponentService), Lifetime = Microsoft.Extensions.DependencyInjection.ServiceLifetime.Singleton, RegisterBehavior = ServiceRegisterBehavior.Optional)]
+    [ModuleStartup(typeof(Startup))]
     public class MarkdownModule : RazorComponentClientModule
     {
+        class Startup : RazorComponentClientModuleStartup
+        {
+            public override void ConfigureServices(IServiceCollection services)
+            {
+                services.TryAddSingleton<IHtmlSanitizer>(new HtmlSanitizer());
+                base.ConfigureServices(services);
+            }
+        }
+
         public MarkdownModule(IModuleHost host) : base(host)
         {
         }

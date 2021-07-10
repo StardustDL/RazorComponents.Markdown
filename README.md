@@ -34,6 +34,7 @@ Online demo:
 - Emoji
 - Code highlighting
 - Delay rendering for less CPU intensive
+- HTML Sanitizing to prevent XSS
 
 ## Usage
 
@@ -52,10 +53,6 @@ Here are the example codes, which based on the instructions from [Usage](https:/
 **WebAssembly**
 
 ```cs
-// in App.razor
-
-<Modulight.Modules.Client.RazorComponents.UI.ResourceDeclare />
-
 // in Program.cs
 
 public static async Task Main(string[] args) 
@@ -78,6 +75,10 @@ public static async Task Main(string[] args)
 **Razor Pages**
 
 ```cs
+// in App.razor
+
+<Modulight.Modules.Client.RazorComponents.UI.ResourceDeclare />
+
 // in Startup: void ConfigureServices(ISeviceCollection services)
 
 using StardustDL.RazorComponents.Markdown;
@@ -110,29 +111,10 @@ Parameters:
 - `Class` class attribute
 - `Style` style attribute
 - `RenderInterval` Delay rendering interval (`TimeSpan`), default `null` for no delay.
-
-## Configuration
-
-Use `IMarkdownComponentService` to configure.
-
-> Attention: The configuration will be changed in next version.
-
-```csharp
-Service.EnableCodeHighlight = true;
-Service.EnableDiagrams = true;
-Service.EnableMathematics = true;
-```
-
-If you want to customize Markdown's parser pipeline, you can inherit inherit `MarkdownComponentService` and override the method `GetPipeline()`.
-
-If you want to customize the all things, you can inherit inherit `MarkdownComponentService` and override the method `RenderHTML(string)`.
-
-For custom `IMarkdownComponentService`, use the codes below to inject services.
-
-```cs
-// before AddModules
-builder.Services.AddSingleton<IMarkdownComponentService, MarkdownComponentService>();
-```
+- `EnableCodeHighlighting` Highlighing code blocks, default `true`.
+- `EnableDiagrams` Rendering diagrams, default `true`.
+- `EnableMathematics` Rendering LaTex lines, default `true`.
+- `EnableHtmlSanitizing` Sanitizing the final HTML to prevent XSS, default `true`.
 
 ## Preview
 
@@ -161,6 +143,7 @@ Here are some screenshots from the demo project.
 ## Dependencies
 
 - [Markdig](https://github.com/lunet-io/markdig)
+- [HtmlSanitizer](https://github.com/mganss/HtmlSanitizer)
 - [Katex](https://github.com/KaTeX/KaTeX)
 - [Mermaid.js](https://github.com/mermaid-js/mermaid)
 - [PrismJS](https://github.com/PrismJS/prism)
