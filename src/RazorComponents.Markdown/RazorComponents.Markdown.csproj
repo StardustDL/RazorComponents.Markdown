@@ -32,7 +32,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlSanitizer" Version="5.0.404" />
     <PackageReference Include="Markdig" Version="0.25.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.11" />
     <PackageReference Include="Modulight.Modules.Client.RazorComponents" Version="0.0.7" />
   </ItemGroup>
 </Project>
