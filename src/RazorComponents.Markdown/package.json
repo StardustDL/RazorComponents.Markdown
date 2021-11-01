@@ -9,7 +9,7 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "katex": "^0.13.11",
+    "katex": "^0.15.1",
     "mermaid": "^8.11.0",
     "prismjs": "^1.24.1"
   },
