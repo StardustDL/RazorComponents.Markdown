@@ -10,7 +10,7 @@
   "private": true,
   "dependencies": {
     "katex": "^0.13.11",
-    "mermaid": "^8.11.0",
+    "mermaid": "^9.1.6",
     "prismjs": "^1.24.1"
   },
   "devDependencies": {
